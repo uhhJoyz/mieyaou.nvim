@@ -2,7 +2,7 @@
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    miaou.url = "github:uhhJoyz/miaou.nvim";
+    miaou.url = "github:uhhJoyz/miaou-wrapper";
   };
 
   outputs = {

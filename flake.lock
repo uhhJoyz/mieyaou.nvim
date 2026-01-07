@@ -84,13 +84,13 @@
         "lastModified": 1767667416,
         "narHash": "sha256-LpVsmBp4mrpYk7bQURa/t7+Gf21n8a52n3nOvIv5hjY=",
         "owner": "uhhJoyz",
-        "repo": "miaou.nvim",
+        "repo": "miaou-wrapper",
         "rev": "c138206f150fac7796bbd2e84ffebfe66be3d39f",
         "type": "github"
       },
       "original": {
         "owner": "uhhJoyz",
-        "repo": "miaou.nvim",
+        "repo": "miaou-wrapper",
         "type": "github"
       }
     },
