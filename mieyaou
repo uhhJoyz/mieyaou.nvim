@@ -1,10 +1,10 @@
 #!/bin/bash
-config_dir="$HOME"/.config/miaou
+MIEYAOU_HOME="$HOME"/.config/mieyaou
 bin_ext=/result/bin/nvim
 
 get_nix_cmd() {
-  if [ -f "$config_dir"/nix-portable ]; then
-    echo "$config_dir"/nix-portable
+  if [ -f "$MIEYAOU_HOME"/nix-portable ]; then
+    echo "$MIEYAOU_HOME"/nix-portable
   else
     echo nix
   fi
@@ -37,7 +37,7 @@ maybe_install_nix() {
 
 update_miaou() {
   cwd=$(pwd)
-  cd "$config_dir" || (echo "Config dir not present, cannot update" && exit)
+  cd "$MIEYAOU_HOME" || (echo "Config dir not present, cannot update" && exit)
   nix flake update miaou || (echo "Failed to update miaou. Terminating." && exit)
   rm -rf ./result
   nix build . --refresh || (echo "Failed to update miaou. Terminating." && exit)
@@ -48,22 +48,26 @@ update_miaou() {
 
 # actual script
 
-if [ "$1" = "--update" ]; then
+if [[ "$1" = "-h" || "$1" = "--help" || ! -f "$MIEYAOU_HOME$bin_ext" ]]; then
+  echo -e "usage: mieyaou <your file> OR --<flag>\nflags:\n\t--update: fetch updates to the miaou definitions\n\t--rebuild: rebuild from locally stored meows\n\t--setup: perform first-time setup operations"
+elif [ "$1" = "--update" ]; then
   update_miaou
 elif [ "$1" = "--setup" ]; then
   cwd=$(pwd)
-  if ! ls "$config_dir" >/dev/null 2>&1; then
+  if ! ls "$MIEYAOU_HOME" >/dev/null 2>&1; then
     echo "Config dir not initialized, creating directory."
-    mv "$(dirname "$(realpath "$0")")" "$config_dir"
-    cd "$config_dir" || (echo "Failed to create config dir." && exit)
+    mv "$(dirname "$(realpath "$0")")" "$MIEYAOU_HOME"
+    cd "$MIEYAOU_HOME" || (echo "Failed to create config dir." && exit)
   else
-    if [ "$config_dir" != "$(pwd)" ]; then
-      cd "$config_dir" || (echo "Config dir already exists, but we could not change to it." && exit)
+    if [ "$MIEYAOU_HOME" != "$(pwd)" ]; then
+      cd "$MIEYAOU_HOME" || (echo "Config dir already exists, but we could not change to it." && exit)
     fi
   fi
   maybe_install_nix
   cd "$cwd" || (echo "Could not return to previous directory." && exit)
-  echo "Setup completed."
+  echo "First-time setup completed, now building."
+  update_miaou
+  echo "Mieyaou updated."
 else
-  "$config_dir$bin_ext" "$@"
+  "$MIEYAOU_HOME$bin_ext" "$@"
 fi
