@@ -81,11 +81,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1767758628,
-        "narHash": "sha256-e+ngw8su+hxpkjaLZxswOa4AQ6M7sb0cqtNhbLm39g4=",
+        "lastModified": 1767801841,
+        "narHash": "sha256-6B8sAfMz2UvN7rzp0bRBFVAUHJkxZoZO6z67mTa9FQ8=",
         "owner": "uhhJoyz",
         "repo": "miaou-wrapper",
-        "rev": "6be1f62e32db1504c241824f324332309b05ea61",
+        "rev": "3a49441af3aba837e2d74d2e50488ef6e03642af",
         "type": "github"
       },
       "original": {
