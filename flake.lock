@@ -81,11 +81,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1767667416,
-        "narHash": "sha256-LpVsmBp4mrpYk7bQURa/t7+Gf21n8a52n3nOvIv5hjY=",
+        "lastModified": 1767753347,
+        "narHash": "sha256-LSFWPQtBFdOzqXn6Jw5N8WRRDRNC/KJiMj6gJQiVuiY=",
         "owner": "uhhJoyz",
         "repo": "miaou-wrapper",
-        "rev": "c138206f150fac7796bbd2e84ffebfe66be3d39f",
+        "rev": "1b19499f92c83959727b8ba3cbc1ad59706b7080",
         "type": "github"
       },
       "original": {
@@ -195,11 +195,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1767379071,
-        "narHash": "sha256-EgE0pxsrW9jp9YFMkHL9JMXxcqi/OoumPJYwf+Okucw=",
+        "lastModified": 1767640445,
+        "narHash": "sha256-UWYqmD7JFBEDBHWYcqE6s6c77pWdcU/i+bwD6XxMb8A=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fb7944c166a3b630f177938e478f0378e64ce108",
+        "rev": "9f0c42f8bc7151b8e7e5840fb3bd454ad850d8c5",
         "type": "github"
       },
       "original": {

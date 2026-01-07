@@ -2,14 +2,18 @@
 config_dir="$HOME"/.config/miaou
 bin_ext=/result/bin/nvim
 
-maybe_install_nix() {
-  cmd=nix
-
-  if [ -f "./nix-portable" ]; then
-    cmd=./nix-portable
+get_nix_cmd() {
+  if [ -f "$config_dir"/nix-portable ]; then
+    echo "$config_dir"/nix-portable
+  else
+    echo nix
   fi
+}
 
-  if $cmd --version >/dev/null 2>&1; then
+nixcmd=$(get_nix_cmd)
+
+maybe_install_nix() {
+  if $nixcmd --version >/dev/null 2>&1; then
     read -r -n 1 -p "Nix is not availabe on the system, would you like to proceed with installation? (y/n)" yn
     case $yn in
       [Yy]* ) echo -e "\nProceeding with installation, preferring portable on supported systems.";;
@@ -24,17 +28,28 @@ maybe_install_nix() {
       curl -L https://github.com/DavHau/nix-portable/releases/latest/download/nix-portable-"$(uname -m)" >./nix-portable
       chmod +x ./nix-portable || (echo "Failed to install nix-portable. Exiting." && exit)
       echo "Nix portable installed successfully."
-      cmd=$(pwd)/nix-portable
+      nixcmd=$(pwd)/nix-portable
     fi
   else
     echo "Nix already installed or available in system."
   fi
 }
 
+update_miaou() {
+  cwd=$(pwd)
+  cd "$config_dir" || (echo "Config dir not present, cannot update" && exit)
+  nix flake update miaou || (echo "Failed to update miaou. Terminating." && exit)
+  rm -rf ./result
+  nix build . --refresh || (echo "Failed to update miaou. Terminating." && exit)
+
+  cd "$cwd" || (echo "Could not return to working directory." && exit)
+  echo "Successfully updated miaou."
+}
+
 # actual script
 
 if [ "$1" = "--update" ]; then
-  nix build "$config_dir" --refresh
+  update_miaou
 elif [ "$1" = "--setup" ]; then
   cwd=$(pwd)
   if ! ls "$config_dir" >/dev/null 2>&1; then
